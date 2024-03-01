@@ -8,16 +8,23 @@ function Nav() {
     return (
       <header className="container-fluid header mt-3" style={{ marginBottom: 25 }}>
         <div className ="row" >
-            <h1 className="col-lg-2">PollR</h1>
+            <h1 className=" col-lg-2">
+                    <Link 
+                        to="/"
+                        className={currentPage === '/' ? 'nav-link active' : 'nav-link'}
+                    >
+                        PollR
+                    </Link>
+            </h1>
             <nav className="nav navbar nav-pills col-lg-10 justify-content-end">
-                <ul className="nav-item">
+                {/* <ul className="nav-item">
                     <Link 
                         to="/"
                         className={currentPage === '/' ? 'nav-link active' : 'nav-link'}
                     >
                         Home
                     </Link>
-                </ul>
+                </ul> */}
                 <ul className="nav-item">
                     <Link 
                         to="/createPoll"
