@@ -7,11 +7,9 @@ function Nav() {
 
     return (
       <header className="container-fluid header mt-3" style={{ marginBottom: 25 }}>
-        <div>
-                <h1>PollR</h1>
-        </div>
         <div className ="row" >
-            <nav className="nav navbar nav-pills col-md justify-content-end">
+            <h1 className="col-lg-2">PollR</h1>
+            <nav className="nav navbar nav-pills col-lg-10 justify-content-end">
                 <ul className="nav-item">
                     <Link 
                         to="/"
