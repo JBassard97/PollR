@@ -1,16 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
 import { Outlet } from 'react-router-dom';
+import Nav from '../src/components/NavHeader';
+import Footer from '../src/components/Footer';
+import './App.css';
 
 function App() {
   return (
     <>
+      <Nav />
       <main>
         <Outlet />
       </main>
+      <Footer />
     </>
   );
 }
