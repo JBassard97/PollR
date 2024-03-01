@@ -17,14 +17,6 @@ function Nav() {
                     </Link>
             </h1>
             <nav className="nav navbar nav-pills col-lg-10 justify-content-end">
-                {/* <ul className="nav-item">
-                    <Link 
-                        to="/"
-                        className={currentPage === '/' ? 'nav-link active' : 'nav-link'}
-                    >
-                        Home
-                    </Link>
-                </ul> */}
                 <ul className="nav-item">
                     <Link 
                         to="/createPoll"
