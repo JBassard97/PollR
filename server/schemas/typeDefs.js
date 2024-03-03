@@ -68,7 +68,7 @@ type Mutation {
   createUser(input: CreateUserInput!): Auth # Create a new user
   createPoll(input: CreatePollInput!): Poll # Create a new poll
   updateUser(_id: ID!, input: UpdateUserInput!): User # Update a user by ID
-  loginUser(email: String!, password: String!): Auth # Login user and retrieve JWT token
+  login(email: String!, password: String!): Auth # Login user and retrieve JWT token
   deleteUser(_id: ID!): User # Delete a user by ID
   deletePoll(_id: ID!): Poll # Delete a poll by ID
   createVote(pollId: ID!, choiceId: ID!): Vote # Create a vote in a poll for a specific choice
