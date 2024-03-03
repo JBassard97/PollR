@@ -21,14 +21,14 @@ const userSchema = new Schema(
       type: String,
       required: true,
       minlength: 6,
-        },
+    },
     // ! Array of Polls they've created
     pollsMade: [
       {
         type: Schema.Types.ObjectId,
         ref: "Poll",
       },
-        ],
+    ],
     // ! Array of Votes they've created
     votesMade: [
       {
@@ -56,7 +56,7 @@ userSchema.pre("save", async function (next) {
 
 // Compare the incoming password with the hashed password
 userSchema.methods.isCorrectPassword = async function (password) {
-  await bcrypt.compare(password, this.password);
+  return await bcrypt.compare(password, this.password);
 };
 
 // ! Virtual to return total number of polls created

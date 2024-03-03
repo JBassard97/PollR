@@ -67,12 +67,25 @@ const resolvers = {
       });
       return updatedUser;
     },
-    loginUser: async (parent, { email, password }) => {
+    // ! GOOD
+    login: async (parent, { email, password }) => {
+      console.log(email, password);
       const user = await User.findOne({ email });
-      if (!user || !(await user.isCorrectPassword(password))) {
+      console.log(user);
+
+      if (!user) {
         throw AuthenticationError;
       }
+
+      const correctPw = await user.isCorrectPassword(password);
+      console.log(correctPw);
+
+      if (!correctPw) {
+        throw AuthenticationError;
+      }
+
       const token = signToken(user);
+
       return { token, user };
     },
     deleteUser: async (parent, { _id }) => {
