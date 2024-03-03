@@ -2,6 +2,9 @@
 export default function UserProfile () {
 
     return (
-        <h1>User Profile</h1>
+
+        <div className="container" style={{ color: "white", height: 500}}>
+            <h1>User Profile</h1>
+        </div>
     );
 }
