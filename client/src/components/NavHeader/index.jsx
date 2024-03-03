@@ -14,21 +14,18 @@ function Nav() {
   return (
     <header
       className="container-fluid header mt-3"
-      style={{ marginBottom: 25 }}
+      style={{ color: "white", marginBottom: 50}}
     >
-      <div>
-        <h1>PollR</h1>
-      </div>
       <div className="row">
-        <nav className="nav navbar nav-pills col-md justify-content-end">
-          <ul className="nav-item">
+        <h1 className="col-md-3 d-flex align-items-center">
             <Link
               to="/"
               className={currentPage === "/" ? "nav-link active" : "nav-link"}
             >
-              Home
+              PollR
             </Link>
-          </ul>
+        </h1>
+        <nav className="nav navbar nav-pills col-md-9 justify-content-end">
           <ul className="nav-item">
             <Link
               to="/createPoll"
@@ -41,22 +38,22 @@ function Nav() {
           </ul>
           <ul className="nav-item">
             <Link
-              to="/userSettings"
-              className={
-                currentPage === "/userSettings" ? "nav-link active" : "nav-link"
-              }
-            >
-              User Settings
-            </Link>
-          </ul>
-          <ul className="nav-item">
-            <Link
               to="/userProfile"
               className={
                 currentPage === "/userProfile" ? "nav-link active" : "nav-link"
               }
             >
-              User Profile
+              My Profile
+            </Link>
+          </ul>
+          <ul className="nav-item">
+            <Link
+              to="/userSettings"
+              className={
+                currentPage === "/userSettings" ? "nav-link active" : "nav-link"
+              }
+            >
+              Settings
             </Link>
           </ul>
           {Auth.loggedIn() ? (
