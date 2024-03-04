@@ -58,12 +58,14 @@ export default function CreatePoll () {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(formatMutation(formState));
+
+        const createPollInput = formatMutation(formState);
+        console.log(createPollInput);
         
         
         try {
             const { data } = await createPoll({
-                variables: { input: formatMutation(formState) },
+                variables: { input: createPollInput },
             });
         } catch (e) {
             console.error(e);
@@ -92,7 +94,7 @@ export default function CreatePoll () {
                     <h2>Create a Poll</h2>
                     <form onSubmit={handleFormSubmit}>
                         <div className="form-group row p-2">
-                            <label for="title" className="col-sm-2 col-form-label">Title: </label>
+                            <label className="col-sm-2 col-form-label">Title: </label>
                             <div className="col-sm-8">
                                 <input 
                                     placeholder="Poll Title"
@@ -107,7 +109,7 @@ export default function CreatePoll () {
                             </div>
                         </div>
                         <div className="form-group row p-2">
-                            <label for="title" className="col-sm-2 col-form-label">Description: </label>
+                            <label className="col-sm-2 col-form-label">Description: </label>
                             <div className="col-sm-8">
                                 <input
                                     placeholder="Brief poll description (Optional)" 
@@ -121,7 +123,7 @@ export default function CreatePoll () {
                             </div>
                         </div>
                         <div className="form-group row p-2">
-                            <label for="title" className="col-sm-2 col-form-label">{`Choices: Must be between 2 and 8`}</label>
+                            <label className="col-sm-2 col-form-label">{`Choices: Must be between 2 and 8`}</label>
                             <div className="col-sm-8">
                                 <input
                                     placeholder="Choice 1" 
