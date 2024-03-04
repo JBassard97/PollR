@@ -88,6 +88,7 @@ export default function CreatePoll () {
     }
 
     return (
+
         <main>
             {Auth.loggedIn() ? (
                 <>
@@ -208,5 +209,6 @@ export default function CreatePoll () {
                 </>
             )}
         </main>
+
     );
 }

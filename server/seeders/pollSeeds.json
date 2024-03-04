@@ -1,0 +1,16 @@
+[
+  {
+    "header": "Poll 1 Header",
+    "description": "Description for Poll 1",
+    "choices": [
+      { "text": "Choice 1" },
+      { "text": "Choice 2" },
+      { "text": "Choice 3" }
+    ]
+  },
+  {
+    "header": "Poll 2 Header",
+    "description": "Description for Poll 2",
+    "choices": [{ "text": "Choice 1" }, { "text": "Choice 2" }]
+  }
+]
