@@ -1,7 +1,17 @@
+import { useQuery } from "@apollo/client";
+import { useEffect } from "react";
 
-export default function UserProfile () {
+import { GET_CURRENT_USER } from "../../utils/queries";
 
-    return (
-        <h1>User Profile</h1>
-    );
+// import Auth from "../../utils/auth";
+
+export default function UserProfile() {
+  const { loading, data } = useQuery(GET_CURRENT_USER);
+
+  useEffect(() => {
+    const user = data?.me || data?.user || {};
+    console.log(user);
+  }, []);
+
+  return <h1>User Profile</h1>;
 }

@@ -1,10 +1,5 @@
 import { gql } from "@apollo/client";
 
-// TODO: ADD HERE FOR THE QUERIES
-// queries.js
-
-import { gql } from "@apollo/client";
-
 export const GET_CURRENT_USER = gql`
   query Me {
     me {

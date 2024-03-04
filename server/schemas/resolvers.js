@@ -78,7 +78,6 @@ const resolvers = {
       }
 
       const correctPw = await user.isCorrectPassword(password);
-      console.log(correctPw);
 
       if (!correctPw) {
         throw AuthenticationError;
