@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 import { GET_CURRENT_USER } from "../../utils/queries";
 
+<<<<<<< HEAD
 // import Auth from "../../utils/auth";
 
 export default function UserProfile() {
@@ -15,3 +16,12 @@ export default function UserProfile() {
 
   return <h1>User Profile</h1>;
 }
+=======
+    return (
+
+        <div className="container" style={{ color: "white", height: 500}}>
+            <h1>User Profile</h1>
+        </div>
+    );
+}
+>>>>>>> 0c50f5d8e3b1b4621dc601f3af32a0dd5c4d5089

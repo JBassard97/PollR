@@ -5,11 +5,15 @@ export default function Home() {
     <>
       {Auth.loggedIn() ? (
         <>
-          <h1>You're logged in stud!</h1>
+        <div className="container" style={{ color: "white", height: 500}}>
+          <h1>Welcome to PollR!</h1>
+        </div>
         </>
       ) : (
         <>
-          <h1>Nah not logged in bud...</h1>
+        <div className="container" style={{ color: "white", height: 500}}>
+          <h3>To access all PollR has to offer, please Log-in or Sign-up!</h3>
+        </div>  
         </>
       )}
     </>
