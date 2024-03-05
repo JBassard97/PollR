@@ -27,24 +27,35 @@ const getRandomUserIds = async () => {
 };
 
 const seedPolls = async () => {
+  let userIds = [];
   try {
-    const userIds = await getRandomUserIds();
+    // Get ObjectIDs of 5 random users
+    userIds = await getRandomUserIds();
 
+    // Iterate over each poll
     for (const pollInfo of polls) {
       // Create a new poll instance
       const poll = new Poll(pollInfo);
 
-      if (userIds) {
+      if (userIds.length > 0) {
+        // Select a random user ID from the array of user IDs
         const randomUserId =
           userIds[Math.floor(Math.random() * userIds.length)];
+
+        // Set the creator of the poll
         poll.creator = randomUserId;
+
+        // Save the poll to the database
+        await poll.save();
+
+        // Update the user's pollsMade array
+        await User.findByIdAndUpdate(randomUserId, {
+          $addToSet: { pollsMade: poll._id },
+        });
       } else {
         console.error("No random user ID available.");
         continue;
       }
-
-      // Save the poll to the database
-      await poll.save();
     }
 
     console.log("Polls seeded successfully.");

@@ -53,7 +53,11 @@ input UpdateUserInput {
 input CreatePollInput {
   header: String! # Header text of the new poll
   description: String # Description of the new poll (optional)
-  choices: [String!]! # Choices for the new poll
+  choices: [CreateChoiceInput!]! # Choices for the new poll
+}
+
+input CreateChoiceInput {
+  text: String!
 }
 
 type Query {
