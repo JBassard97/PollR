@@ -1,7 +1,6 @@
 import Auth from "../../utils/auth";
 import { GET_ALL_POLLS } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
 
 import Poll from "../../components/Poll/index";
 
