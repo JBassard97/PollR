@@ -59,6 +59,11 @@ const resolvers = {
         throw AuthenticationError;
       }
       const poll = await Poll.create({ ...input, creator: context.user._id });
+      console.log(context.user._id);
+
+      await User.findByIdAndUpdate(context.user._id, {
+        $addToSet: { pollsMade: poll._id },
+      });
       return poll;
     },
     updateUser: async (parent, { _id, input }) => {

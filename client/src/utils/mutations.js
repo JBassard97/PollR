@@ -27,18 +27,6 @@ export const CREATE_POLL = gql`
       }
       creator {
         _id
-        username
-      }
-      votes {
-        _id
-        user {
-          _id
-          username
-        }
-        choice {
-          _id
-          text
-        }
       }
       voteCount
     }

@@ -102,7 +102,7 @@ export const GET_USER_BY_USERNAME = gql`
 `;
 
 export const GET_ALL_POLLS = gql`
-  query Polls {
+  query {
     polls {
       _id
       header
