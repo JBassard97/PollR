@@ -8,10 +8,9 @@ import { GET_CURRENT_USER } from "../../utils/queries";
 export default function UserProfile() {
   const { loading, data } = useQuery(GET_CURRENT_USER);
 
-  useEffect(() => {
-    const user = data?.me || data?.user || {};
-    console.log(user);
-  }, []);
+  if (data) {
+    console.log(data.me);
+  }
 
   return <h1>User Profile</h1>;
 }
