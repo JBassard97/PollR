@@ -14,7 +14,6 @@ function Nav() {
   return (
     <header
       className="container-fluid header mt-3"
-      style={{ color: "white", marginBottom: 50}}
     >
       <div className="row">
         <h1 className="col-md-3 d-flex align-items-center">

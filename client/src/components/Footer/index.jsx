@@ -1,4 +1,5 @@
 import GithubLogo from "../../assets/github-logo.png";
+import "./footer.css";
 
 function Footer() {
     return (

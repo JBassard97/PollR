@@ -1,3 +1,4 @@
+import "./home.css";
 import Auth from "../../utils/auth";
 import { GET_ALL_POLLS } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
@@ -13,9 +14,9 @@ export default function Home() {
 
   return (
     <>
-      <main className="container" style={{ color: "white" }}>
+      <main className="homepage" style={{ color: "white" }}>
         <h1>Welcome to PollR!</h1>
-        {/* Check if data is loading */}
+        <div className="pollContainer">
         {loading ? (
           <p>Loading...</p>
         ) : (
@@ -28,7 +29,8 @@ export default function Home() {
                 <Poll key={index} poll={poll} />
               ))}
           </>
-        )}
+          )}
+          </div>
       </main>
     </>
   );
