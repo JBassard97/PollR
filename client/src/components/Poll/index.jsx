@@ -1,15 +1,19 @@
+import "./poll.css";
 import React from "react";
 
 const Poll = ({ poll }) => {
   return (
     <div className="poll">
-      <h2>{poll.header}</h2>
-      <p>{poll.description}</p>
-      <h3>Choices:</h3>
+      <div>
+      <p className="pollHeader">{poll.header}</p>
+        <p className="pollDesc">{poll.description}</p>
+        </div>
       {poll.choices.map((choice, index) => (
-        <p key={index}>{choice.text}</p>
+        <p className="pollChoice" key={index}>
+          {choice.text}
+        </p>
       ))}
-      <p>Created by: {poll.creator.username}</p>
+      <p className="createdBy">Created by: {poll.creator.username}</p>
     </div>
   );
 };

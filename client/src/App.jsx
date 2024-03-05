@@ -37,9 +37,7 @@ function App() {
     <>
       <ApolloProvider client={client}>
         <Nav />
-        <main>
           <Outlet />
-        </main>
         <Footer />
       </ApolloProvider>
     </>
