@@ -28,7 +28,7 @@ type Choice {
 
 type Vote {
   _id: ID # Unique identifier for the vote
-  user: User! # User who cast the vote
+  user: User # User who cast the vote
   poll: Poll! # Poll in which the vote was cast
   choice: Choice! # Choice selected in the vote
 }

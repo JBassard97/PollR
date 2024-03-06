@@ -1,15 +1,42 @@
 import "./poll.css";
 import React from "react";
+import { useMutation } from "@apollo/client";
+import { useState } from "react";
+import { CREATE_VOTE } from "../../utils/mutations";
 
 const Poll = ({ poll }) => {
+  const [createVote, { error, data }] = useMutation(CREATE_VOTE);
+
+  const handleChoiceClick = async (choiceId) => {
+    if (!poll || !poll._id) {
+      console.error("Poll or poll ID is undefined");
+      return;
+    }
+
+    console.log("Choice Id:", choiceId);
+    console.log("Poll Id:", poll._id);
+    try {
+      const { data } = await createVote({
+        variables: { pollId: poll._id, choiceId: choiceId },
+      });
+    } catch (error) {
+      console.error("error:", error);
+    }
+  };
+
   return (
-    <div className="poll">
+    <div className="poll" id={poll._id}>
       <div>
-      <p className="pollHeader">{poll.header}</p>
+        <p className="pollHeader">{poll.header}</p>
         <p className="pollDesc">{poll.description}</p>
-        </div>
+      </div>
       {poll.choices.map((choice, index) => (
-        <p className="pollChoice" key={index}>
+        <p
+          className="pollChoice"
+          id={choice._id}
+          key={index}
+          onClick={() => handleChoiceClick(choice._id)}
+        >
           {choice.text}
         </p>
       ))}
