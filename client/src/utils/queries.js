@@ -10,24 +10,22 @@ export const GET_CURRENT_USER = gql`
       voteCount
       pollCount
       pollsMade {
+        creator {
+          _id
+        }
         _id
         header
         description
         voteCount
-        votes {
-          choice {
-            voteCount
-          }
-        }
         choices {
           text
           voteCount
-          votes {
-            choice {
-              text
-              voteCount
-            }
-          }
+        }
+      }
+      votesMade {
+        _id
+        poll {
+          _id
         }
       }
     }
@@ -110,21 +108,11 @@ export const GET_ALL_POLLS = gql`
       choices {
         _id
         text
+        voteCount
       }
       creator {
-        _id
         username
-      }
-      votes {
         _id
-        user {
-          _id
-          username
-        }
-        choice {
-          _id
-          text
-        }
       }
       voteCount
     }

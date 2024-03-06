@@ -7,7 +7,7 @@ const resolvers = {
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id })
-          .populate("pollsMade")
+          .populate({ path: "pollsMade", populate: { path: "creator" } })
           .populate("votesMade");
       }
       throw AuthenticationError;
@@ -101,15 +101,40 @@ const resolvers = {
       return deletedPoll;
     },
     createVote: async (parent, { pollId, choiceId }, context) => {
+      // Check if user is authenticated
       if (!context.user) {
-        throw AuthenticationError;
+        throw new AuthenticationError("You must be logged in to vote.");
       }
-      const vote = await Vote.create({
-        user: context.user._id,
-        poll: pollId,
-        choice: choiceId,
-      });
-      return vote;
+
+      try {
+        // Create the vote
+        const vote = await Vote.create({
+          user: context.user._id,
+          poll: pollId,
+          choice: choiceId,
+        });
+
+        // Update the poll's votes field
+        await Poll.findByIdAndUpdate(pollId, {
+          $addToSet: { votes: vote._id },
+        });
+
+        // Update the choice's votes field
+        await Poll.findOneAndUpdate(
+          { _id: pollId, "choices._id": choiceId },
+          { $addToSet: { "choices.$.votes": vote._id } }
+        );
+
+        // Update the user's votesMade field
+        await User.findByIdAndUpdate(context.user._id, {
+          $addToSet: { votesMade: vote._id },
+        });
+
+        return vote;
+      } catch (error) {
+        console.error("Error creating vote:", error);
+        throw new Error("An error occurred while creating the vote.");
+      }
     },
   },
 };
