@@ -3,9 +3,17 @@ import React from "react";
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { CREATE_VOTE } from "../../utils/mutations";
+import Auth from "../../utils/auth";
 
 const Poll = ({ poll }) => {
   const [createVote, { error, data }] = useMutation(CREATE_VOTE);
+  const currentUserId = Auth.getProfile().authenticatedPerson._id;
+
+  const hasUserVoted = poll.votes.some(
+    (vote) => vote.user._id === currentUserId
+  );
+  console.log(hasUserVoted, poll.header);
+  console.log(poll);
 
   const handleChoiceClick = async (choiceId) => {
     if (!poll || !poll._id) {
@@ -35,7 +43,7 @@ const Poll = ({ poll }) => {
           className="pollChoice"
           id={choice._id}
           key={index}
-          onClick={() => handleChoiceClick(choice._id)}
+          onClick={hasUserVoted ? null : () => handleChoiceClick(choice._id)}
         >
           {choice.text}
         </p>
