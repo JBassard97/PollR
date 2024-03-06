@@ -12,49 +12,57 @@ function Nav() {
   };
 
   return (
-    <header
-      className="container-fluid header mt-3"
-    >
+    <header className="container-fluid header mt-3">
       <div className="row">
         <h1 className="col-md-3 d-flex align-items-center">
-            <Link
-              to="/"
-              className={currentPage === "/" ? "nav-link active" : "nav-link"}
-            >
-              PollR
-            </Link>
+          <Link
+            to="/"
+            className={currentPage === "/" ? "nav-link active" : "nav-link"}
+          >
+            PollR
+          </Link>
         </h1>
         <nav className="nav navbar nav-pills col-md-9 justify-content-end">
-          <ul className="nav-item">
-            <Link
-              to="/createPoll"
-              className={
-                currentPage === "/createPoll" ? "nav-link active" : "nav-link"
-              }
-            >
-              Create Poll
-            </Link>
-          </ul>
-          <ul className="nav-item">
-            <Link
-              to="/userProfile"
-              className={
-                currentPage === "/userProfile" ? "nav-link active" : "nav-link"
-              }
-            >
-              My Profile
-            </Link>
-          </ul>
-          <ul className="nav-item">
-            <Link
-              to="/userSettings"
-              className={
-                currentPage === "/userSettings" ? "nav-link active" : "nav-link"
-              }
-            >
-              Settings
-            </Link>
-          </ul>
+          {Auth.loggedIn() && (
+            <>
+              <ul className="nav-item">
+                <Link
+                  to="/createPoll"
+                  className={
+                    currentPage === "/createPoll"
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                >
+                  Create Poll
+                </Link>
+              </ul>
+              <ul className="nav-item">
+                <Link
+                  to="/userProfile"
+                  className={
+                    currentPage === "/userProfile"
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                >
+                  My Profile
+                </Link>
+              </ul>
+              <ul className="nav-item">
+                <Link
+                  to="/userSettings"
+                  className={
+                    currentPage === "/userSettings"
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                >
+                  Settings
+                </Link>
+              </ul>
+            </>
+          )}
           {Auth.loggedIn() ? (
             <>
               <ul className="nav-item">
@@ -87,7 +95,6 @@ function Nav() {
       </div>
     </header>
   );
-
 }
 
 export default Nav;
