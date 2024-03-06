@@ -8,7 +8,7 @@ import Auth from "../../utils/auth";
 const Poll = ({ poll }) => {
   const [createVote, { error, data }] = useMutation(CREATE_VOTE);
   const currentUserId = Auth.getProfile().authenticatedPerson._id;
-
+  //branch change
   const hasUserVoted = poll.votes.some(
     (vote) => vote.user._id === currentUserId
   );
