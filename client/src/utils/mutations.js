@@ -104,18 +104,6 @@ export const CREATE_VOTE = gql`
   mutation CreateVote($pollId: ID!, $choiceId: ID!) {
     createVote(pollId: $pollId, choiceId: $choiceId) {
       _id
-      user {
-        _id
-        username
-      }
-      poll {
-        _id
-        header
-      }
-      choice {
-        _id
-        text
-      }
     }
   }
 `;

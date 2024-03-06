@@ -9,9 +9,8 @@ export default function UserProfile() {
   const { loading, data } = useQuery(GET_CURRENT_USER);
 
   useEffect(() => {
-    const user = data?.me || data?.user || {};
-    console.log(user);
-  }, []);
+    console.log("User data:", data.me);
+  }, [data]);
 
   return <h1>User Profile</h1>;
 }

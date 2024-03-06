@@ -53,8 +53,10 @@ export default function CreatePoll() {
 
     try {
       const { data } = await createPoll({
-        variables: { input: createPollInput },
+          variables: { input: createPollInput },
       });
+        
+        window.location.reload();
     } catch (e) {
       console.error(e);
     }
