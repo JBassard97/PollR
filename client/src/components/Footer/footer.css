@@ -1,1 +1,31 @@
 /* ! Aim to make footer sticky to bottom */
+.footer {
+    background-color: #000; /* Set background color */
+    color: white; /* Set text color */
+    position: fixed; /* Set position to fixed */
+    bottom: 0; /* Stick to the bottom */
+    width: 100%; /* Full width */
+    padding: 20px 0; /* Add some padding */
+}
+
+.navbar {
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+}
+
+.navbar ul {
+    list-style: none; /* Remove bullet points */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    display: flex;
+}
+
+.navbar ul li {
+    margin: 0 10px; /* Add some spacing between items */
+}
+
+.logo {
+    width: 30px; /* Set logo width */
+    height: auto; /* Maintain aspect ratio */
+}
