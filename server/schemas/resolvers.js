@@ -34,7 +34,10 @@ const resolvers = {
       return poll;
     },
     polls: async () => {
-      return Poll.find().populate("creator").populate("votes");
+      return Poll.find().populate("creator").populate({
+        path: "votes",
+        populate: {path: "choice"}
+      })
     },
   },
   User: {
