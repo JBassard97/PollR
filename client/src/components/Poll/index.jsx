@@ -6,18 +6,29 @@ import { CREATE_VOTE } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 
 const Poll = ({ poll }) => {
+  const [voteFeedback, setVoteFeedback] = useState('');
   const [createVote, { error, data }] = useMutation(CREATE_VOTE);
-  const currentUserId = Auth.getProfile().authenticatedPerson._id;
-  //branch change
-  const hasUserVoted = poll.votes.some(
-    (vote) => vote.user._id === currentUserId
-  );
-  console.log(hasUserVoted, poll.header);
-  console.log(poll);
+  
+  let hasUserVoted = false;
+  if (Auth.loggedIn()) {
+    const currentUserId = Auth.getProfile().authenticatedPerson._id;
+
+    hasUserVoted = poll.votes.some(
+      (vote) => vote.user._id === currentUserId
+    );
+    
+    //console.log(hasUserVoted, poll.header);
+    //console.log(poll);
+  }
+
+  
 
   const handleChoiceClick = async (choiceId) => {
     if (!poll || !poll._id) {
       console.error("Poll or poll ID is undefined");
+      return;
+    } else if (hasUserVoted) {
+      setVoteFeedback('Already Voted');
       return;
     }
 
@@ -27,10 +38,17 @@ const Poll = ({ poll }) => {
       const { data } = await createVote({
         variables: { pollId: poll._id, choiceId: choiceId },
       });
+
+      window.location.reload();
     } catch (error) {
       console.error("error:", error);
     }
   };
+
+  //Prompts user to login to vote
+  const ifLoggedOut = () => {
+    setVoteFeedback('Please login to vote');
+  }
 
   return (
     <div className="poll" id={poll._id}>
@@ -43,11 +61,12 @@ const Poll = ({ poll }) => {
           className="pollChoice"
           id={choice._id}
           key={index}
-          onClick={hasUserVoted ? null : () => handleChoiceClick(choice._id)}
+          onClick={Auth.loggedIn() ? () => handleChoiceClick(choice._id) : ifLoggedOut}
         >
           {choice.text}
         </p>
       ))}
+      <p className="voteFeedback">{voteFeedback}</p>
       <p className="createdBy">Created by: {poll.creator.username}</p>
     </div>
   );
