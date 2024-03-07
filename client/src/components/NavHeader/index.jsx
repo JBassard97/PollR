@@ -2,6 +2,8 @@ import { Link, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 import Auth from "../../utils/auth";
+import pollRLogo from "../../assets/PollR-logo-Color.png";
+import "./header.css"
 
 function Nav() {
   const currentPage = useLocation().pathname;
@@ -19,7 +21,7 @@ function Nav() {
             to="/"
             className={currentPage === "/" ? "nav-link active" : "nav-link"}
           >
-            PollR
+            <img src={pollRLogo} className="pollRLogo" alt="siteLogo"></img>
           </Link>
         </h1>
         <nav className="nav navbar nav-pills col-md-9 justify-content-end">
