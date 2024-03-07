@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_POLL } from "../../utils/mutations";
 import Auth from "../../utils/auth";
+import "./createPoll.css"
 
 export default function CreatePoll() {
   const [formState, setFormState] = useState({
@@ -81,8 +82,8 @@ export default function CreatePoll() {
     <main>
       {Auth.loggedIn() ? (
         <>
-          <h2>Create a Poll</h2>
-          <form onSubmit={handleFormSubmit}>
+          <h2 className="p-4 m-2">Create a Poll</h2>
+          <form onSubmit={handleFormSubmit} className="p-4">
             <div className="form-group row p-2">
               <label className="col-sm-2 col-form-label">Title: </label>
               <div className="col-sm-8">
@@ -90,7 +91,7 @@ export default function CreatePoll() {
                   placeholder="Poll Title"
                   type="text"
                   id="titleInput"
-                  className="form-control"
+                  className="form-control bg-dark text-light"
                   name="header"
                   value={formState.header}
                   onChange={handleChange}
@@ -105,7 +106,7 @@ export default function CreatePoll() {
                   placeholder="Brief poll description (Optional)"
                   type="text"
                   id="descriptionInput"
-                  className="form-control"
+                  className="form-control bg-dark text-light"
                   name="description"
                   value={formState.description}
                   onChange={handleChange}
@@ -113,13 +114,13 @@ export default function CreatePoll() {
               </div>
             </div>
             <div className="form-group row p-2">
-              <label className="col-sm-2 col-form-label">{`Choices: Must be between 2 and 8`}</label>
+              <label className="col-sm-2 col-form-label">{`Choices: At least 2 choices required`}</label>
               <div className="col-sm-8">
                 <input
                   placeholder="Choice 1"
                   type="text"
                   id="descriptionInput"
-                  className="form-control"
+                  className="form-control bg-dark text-light"
                   name="choice1"
                   value={formState.choice1}
                   onChange={handleChange}
@@ -128,7 +129,7 @@ export default function CreatePoll() {
                   placeholder="Choice 2"
                   type="text"
                   id="descriptionInput"
-                  className="form-control"
+                  className="form-control bg-dark text-light"
                   name="choice2"
                   value={formState.choice2}
                   onChange={handleChange}
@@ -137,7 +138,7 @@ export default function CreatePoll() {
                   placeholder="Choice 3"
                   type="text"
                   id="descriptionInput"
-                  className="form-control"
+                  className="form-control bg-dark text-light"
                   name="choice3"
                   value={formState.choice3}
                   onChange={handleChange}
@@ -146,7 +147,7 @@ export default function CreatePoll() {
                   placeholder="Choice 4"
                   type="text"
                   id="descriptionInput"
-                  className="form-control"
+                  className="form-control bg-dark text-light"
                   name="choice4"
                   value={formState.choice4}
                   onChange={handleChange}
@@ -155,7 +156,7 @@ export default function CreatePoll() {
                   placeholder="Choice 5"
                   type="text"
                   id="descriptionInput"
-                  className="form-control"
+                  className="form-control bg-dark text-light"
                   name="choice5"
                   value={formState.choice5}
                   onChange={handleChange}
@@ -164,7 +165,7 @@ export default function CreatePoll() {
                   placeholder="Choice 6"
                   type="text"
                   id="descriptionInput"
-                  className="form-control"
+                  className="form-control bg-dark text-light"
                   name="choice6"
                   value={formState.choice6}
                   onChange={handleChange}
@@ -173,7 +174,7 @@ export default function CreatePoll() {
                   placeholder="Choice 7"
                   type="text"
                   id="descriptionInput"
-                  className="form-control"
+                  className="form-control bg-dark text-light"
                   name="choice7"
                   value={formState.choice7}
                   onChange={handleChange}
@@ -182,17 +183,15 @@ export default function CreatePoll() {
                   placeholder="Choice 8"
                   type="text"
                   id="descriptionInput"
-                  className="form-control"
+                  className="form-control bg-dark text-light"
                   name="choice8"
                   value={formState.choice8}
                   onChange={handleChange}
                 ></input>
               </div>
             </div>
-            <div className="col-sm-8 offset-sm-4">
-              <button className="submitButton" type="submit">
-                Create Poll
-              </button>
+            <div className="submitBtn">
+              <button className="bg-dark text-light p-3 m-2" type="submit">Create Poll</button>
             </div>
           </form>
         </>

@@ -12,5 +12,5 @@ export default function UserProfile() {
     console.log("User data:", data?.me);
   }, [data]);
 
-  return <h1>User Profile</h1>;
+  return <h2 className="p-4 m-2">My Polls</h2>;
 }
