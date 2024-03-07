@@ -23,6 +23,9 @@
 
 .navbar ul li {
     margin: 0 10px; /* Add some spacing between items */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .logo {

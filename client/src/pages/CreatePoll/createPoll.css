@@ -1,0 +1,8 @@
+.form-control::placeholder {
+    color: #adadad;
+}
+
+h2 {
+    border-top: 2px solid #adadad;
+    border-bottom: 2px solid #adadad
+}
