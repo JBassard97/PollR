@@ -43,7 +43,7 @@ const Login = (props) => {
   };
 
   return (
-    <main className="container mb-4">
+    <main className="loginContainer container mb-4">
       <div className="d-flex justify-content-center col-12 col-lg-10">
         <div className="card">
           <h4 className="card-header bg-dark text-light p-2">Login</h4>
@@ -97,7 +97,10 @@ const Login = (props) => {
           </div>
         </div>
       </div>
-      <Signup/>
+      <div className="signup">
+          <Signup/>
+      </div>
+      
     </main>
   );
 };

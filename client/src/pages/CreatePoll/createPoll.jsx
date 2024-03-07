@@ -189,7 +189,9 @@ export default function CreatePoll() {
                 ></input>
               </div>
             </div>
-            <button type="submit">Create Poll</button>
+            <div className="submitBtn">
+              <button className="bg-dark text-light p-3 m-2" type="submit">Create Poll</button>
+            </div>
           </form>
         </>
       ) : (

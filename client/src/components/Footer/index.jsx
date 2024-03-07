@@ -3,7 +3,7 @@ import "./footer.css";
 
 function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer p-4 m-2">
       <nav className="navbar justify-content-center">
         <div style={{ color: "white" }}>
           <h3>PollR Devs:</h3>

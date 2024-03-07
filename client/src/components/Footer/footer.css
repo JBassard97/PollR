@@ -2,10 +2,17 @@
 .footer {
     background-color: #000; /* Set background color */
     color: white; /* Set text color */
-    position: fixed; /* Set position to fixed */
-    bottom: 0; /* Stick to the bottom */
+
+    /*Play with this.. as it was covering buttons at the bottom*/
+    /*position: fixed;  Set position to fixed 
+    bottom: 0;  Stick to the bottom */
+
+    
     width: 100%; /* Full width */
     padding: 20px 0; /* Add some padding */
+
+    border-top: 2px solid #adadad;
+    border-bottom: 2px solid #adadad
 }
 
 .navbar {

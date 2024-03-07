@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <main className="homepage" style={{ color: "white" }}>
-        <h1>Welcome to PollR!</h1>
+        <h2 className="p-4 m-2">Welcome to PollR!</h2>
         <div className="pollContainer">
         {loading ? (
           <p>Loading...</p>
