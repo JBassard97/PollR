@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_VOTE } from "../../utils/mutations";
 import Auth from "../../utils/auth";
+import Modal from "../../components/Modal/index"
 
 const Poll = ({ poll }) => {
   const [createVote, { error, data }] = useMutation(CREATE_VOTE);
@@ -47,11 +48,17 @@ const Poll = ({ poll }) => {
     }
   };
 
+  const [openModal, setOpenModal] = useState(false);
+
   return (
     <div className="poll" id={poll?._id}>
       <div>
-        <p className="pollHeader">{poll?.header}</p>
-        <p className="pollDesc">{poll?.description}</p>
+        <p className="pollHeader">{poll.header}</p>
+        <p className="pollDesc">{poll.description}</p>
+        <div>
+            <button onClick={() => setOpenModal(true)}>Show Results!</button>
+            <Modal open={openModal} onClose={() => setOpenModal(false)}/>
+          </div>
       </div>
       {!errorMessage ? <></> : errorMessage}
       {poll?.choices?.map((choice, index) => (
