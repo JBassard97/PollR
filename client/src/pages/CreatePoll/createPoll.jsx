@@ -95,6 +95,7 @@ export default function CreatePoll() {
                   name="header"
                   value={formState.header}
                   onChange={handleChange}
+                  maxLength={15}
                   required
                 ></input>
               </div>
@@ -110,6 +111,7 @@ export default function CreatePoll() {
                   name="description"
                   value={formState.description}
                   onChange={handleChange}
+                  maxLength={25}
                 ></input>
               </div>
             </div>
@@ -124,6 +126,7 @@ export default function CreatePoll() {
                   name="choice1"
                   value={formState.choice1}
                   onChange={handleChange}
+                  maxLength={15}
                 ></input>
                 <input
                   placeholder="Choice 2"
@@ -133,6 +136,7 @@ export default function CreatePoll() {
                   name="choice2"
                   value={formState.choice2}
                   onChange={handleChange}
+                  maxLength={15}
                 ></input>
                 <input
                   placeholder="Choice 3"
@@ -142,6 +146,7 @@ export default function CreatePoll() {
                   name="choice3"
                   value={formState.choice3}
                   onChange={handleChange}
+                  maxLength={15}
                 ></input>
                 <input
                   placeholder="Choice 4"
@@ -151,6 +156,7 @@ export default function CreatePoll() {
                   name="choice4"
                   value={formState.choice4}
                   onChange={handleChange}
+                  maxLength={15}
                 ></input>
                 <input
                   placeholder="Choice 5"
@@ -160,6 +166,7 @@ export default function CreatePoll() {
                   name="choice5"
                   value={formState.choice5}
                   onChange={handleChange}
+                  maxLength={15}
                 ></input>
                 <input
                   placeholder="Choice 6"
@@ -169,6 +176,7 @@ export default function CreatePoll() {
                   name="choice6"
                   value={formState.choice6}
                   onChange={handleChange}
+                  maxLength={15}
                 ></input>
                 <input
                   placeholder="Choice 7"
@@ -178,6 +186,7 @@ export default function CreatePoll() {
                   name="choice7"
                   value={formState.choice7}
                   onChange={handleChange}
+                  maxLength={15}
                 ></input>
                 <input
                   placeholder="Choice 8"
@@ -187,11 +196,14 @@ export default function CreatePoll() {
                   name="choice8"
                   value={formState.choice8}
                   onChange={handleChange}
+                  maxLength={15}
                 ></input>
               </div>
             </div>
             <div className="submitBtn">
-              <button className="bg-dark text-light p-3 m-2" type="submit">Create Poll</button>
+              <button className="bg-dark text-light p-3 m-2" type="submit">
+                Create Poll
+              </button>
             </div>
           </form>
         </>
