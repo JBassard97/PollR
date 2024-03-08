@@ -10,12 +10,11 @@ import "./userProfile.css"
 
 export default function UserProfile() {
   const { loading, data } = useQuery(GET_CURRENT_USER);
-
-  /*
+  
   useEffect(() => {
     console.log("User data:", data?.me);
   }, [data]);
-  */
+  
 
   const polls = data?.me.pollsMade || null;
   loading ? console.log("loading") : console.log(polls);

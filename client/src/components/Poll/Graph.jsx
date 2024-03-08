@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {XYPlot, XAxis, YAxis, VerticalBarSeries, } from 'react-vis';
 
 import '../../App.css';
-import '../../../../node_modules/react-vis/dist/style.css'
 
 
 // const Graph = ({poll}) => {
