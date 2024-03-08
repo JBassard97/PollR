@@ -34,12 +34,18 @@ const resolvers = {
       return poll;
     },
     polls: async () => {
-      return Poll.find()
-        .populate("creator")
-        .populate({
-          path: "votes",
-          populate: { path: "choice" },
-        });
+      try {
+        return await Poll.find()
+          .populate("creator", "username") // Populate only the username of the creator
+          .populate({
+            path: "choices",
+            populate: { path: "votes" }, // Populate votes field in choices
+          })
+          .populate("votes.user"); // Populate only the _id of the user who voted
+      } catch (error) {
+        console.error("Error retrieving polls:", error);
+        throw new Error("An error occurred while retrieving polls.");
+      }
     },
   },
   User: {
