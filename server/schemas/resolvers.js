@@ -7,7 +7,7 @@ const resolvers = {
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id })
-          .populate({ path: "pollsMade", populate: { path: "creator" } })
+          .populate({ path: "pollsMade", populate: { path: "votes"} })
           .populate("votesMade");
       }
       throw AuthenticationError;
@@ -34,10 +34,18 @@ const resolvers = {
       return poll;
     },
     polls: async () => {
-      return Poll.find().populate("creator").populate({
-        path: "votes",
-        populate: {path: "choice"}
-      })
+      try {
+        return await Poll.find()
+          .populate("creator", "username") // Populate only the username of the creator
+          .populate({
+            path: "choices",
+            populate: { path: "votes" }, // Populate votes field in choices
+          })
+          .populate("votes.user"); // Populate only the _id of the user who voted
+      } catch (error) {
+        console.error("Error retrieving polls:", error);
+        throw new Error("An error occurred while retrieving polls.");
+      }
     },
   },
   User: {
@@ -96,9 +104,26 @@ const resolvers = {
       return { token, user };
     },
     deleteUser: async (parent, { _id }) => {
-      const deletedUser = await User.findByIdAndDelete(_id);
-      return deletedUser;
+      try {
+        // Find the user to be deleted
+        const userToDelete = await User.findById(_id);
+        if (!userToDelete) {
+          throw new Error("User not found!");
+        }
+
+        // Delete all polls created by the user
+        await Poll.deleteMany({ creator: _id });
+
+        // Delete the user
+        const deletedUser = await User.findByIdAndDelete(_id);
+
+        return deletedUser;
+      } catch (error) {
+        console.error("Error deleting user:", error);
+        throw new Error("An error occurred while deleting the user.");
+      }
     },
+
     deletePoll: async (parent, { _id }) => {
       const deletedPoll = await Poll.findByIdAndDelete(_id);
       return deletedPoll;

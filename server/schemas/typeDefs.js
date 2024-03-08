@@ -3,6 +3,7 @@ type User {
   _id: ID # Unique identifier for the user
   username: String! # Username of the user
   email: String! # Email of the user
+  password: String
   pollsMade: [Poll!]! # Polls created by the user
   votesMade: [Vote!]! # Votes made by the user
   pollCount: Int
@@ -21,8 +22,8 @@ type Poll {
 
 type Choice {
   _id: ID # Unique identifier for the choice
-  text: String! # Text of the choice
-  votes: [Vote]! # Votes cast for this choice
+  text: String # Text of the choice
+  votes: [Vote!] # Votes cast for this choice
   voteCount: Int! # Total number of votes for this choice
 }
 

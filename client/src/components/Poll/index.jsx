@@ -1,5 +1,5 @@
 import "./poll.css";
-import {useState} from "react";
+import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_VOTE } from "../../utils/mutations";
 import Auth from "../../utils/auth";
@@ -12,7 +12,9 @@ const Poll = ({ poll }) => {
   let hasUserVoted = false;
   if (Auth.loggedIn()) {
     const currentUserId = Auth.getProfile().authenticatedPerson._id || null;
-    hasUserVoted = poll.votes.some((vote) => vote.user._id === currentUserId);
+    hasUserVoted = poll?.votes?.some(
+      (vote) => vote?.user?._id === currentUserId
+    );
   }
 
   const handleChoiceClick = async (choiceId) => {
@@ -38,28 +40,24 @@ const Poll = ({ poll }) => {
 
   const handleInvalidVote = (choiceId) => {
     if (!Auth.loggedIn()) {
-      console.log("Log In/Sign Up to Vote")
-      setErrorMessage(<p className="error">Log In to Vote!</p>)
+      console.log("Log In/Sign Up to Vote");
+      setErrorMessage(<p className="error">Log In to Vote!</p>);
     } else {
       console.log("You can't vote twice!", choiceId); // Log choiceId
-      setErrorMessage(<p className="error">Already Voted!</p>)
+      setErrorMessage(<p className="error">Already Voted!</p>);
     }
   };
 
   const [openModal, setOpenModal] = useState(false);
 
   return (
-    <div className="poll" id={poll._id}>
+    <div className="poll" id={poll?._id}>
       <div>
         <p className="pollHeader">{poll.header}</p>
         <p className="pollDesc">{poll.description}</p>
-          <div>
-            <button onClick={() => setOpenModal(true)}>Show Results!</button>
-            <Modal open={openModal} onClose={() => setOpenModal(false)}/>
-          </div>
       </div>
-      {!errorMessage ? (<></>):(errorMessage)}
-      {poll.choices.map((choice, index) => (
+      {!errorMessage ? <></> : errorMessage}
+      {poll?.choices?.map((choice, index) => (
         <p
           className={`pollChoice ${hasUserVoted ? "disabled" : ""}`}
           id={choice._id}
@@ -69,7 +67,9 @@ const Poll = ({ poll }) => {
           {choice.text}
         </p>
       ))}
-      <p className="createdBy">Created by: {poll.creator.username}</p>
+      <p className="createdBy">
+        Created by: {poll?.creator?.username || "Unknown"}
+      </p>
     </div>
   );
 };
