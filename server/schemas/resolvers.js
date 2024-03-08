@@ -34,10 +34,12 @@ const resolvers = {
       return poll;
     },
     polls: async () => {
-      return Poll.find().populate("creator").populate({
-        path: "votes",
-        populate: {path: "choice"}
-      })
+      return Poll.find()
+        .populate("creator")
+        .populate({
+          path: "votes",
+          populate: { path: "choice" },
+        });
     },
   },
   User: {
@@ -96,9 +98,26 @@ const resolvers = {
       return { token, user };
     },
     deleteUser: async (parent, { _id }) => {
-      const deletedUser = await User.findByIdAndDelete(_id);
-      return deletedUser;
+      try {
+        // Find the user to be deleted
+        const userToDelete = await User.findById(_id);
+        if (!userToDelete) {
+          throw new Error("User not found!");
+        }
+
+        // Delete all polls created by the user
+        await Poll.deleteMany({ creator: _id });
+
+        // Delete the user
+        const deletedUser = await User.findByIdAndDelete(_id);
+
+        return deletedUser;
+      } catch (error) {
+        console.error("Error deleting user:", error);
+        throw new Error("An error occurred while deleting the user.");
+      }
     },
+
     deletePoll: async (parent, { _id }) => {
       const deletedPoll = await Poll.findByIdAndDelete(_id);
       return deletedPoll;

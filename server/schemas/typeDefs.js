@@ -3,6 +3,7 @@ type User {
   _id: ID # Unique identifier for the user
   username: String! # Username of the user
   email: String! # Email of the user
+  password: String
   pollsMade: [Poll!]! # Polls created by the user
   votesMade: [Vote!]! # Votes made by the user
   pollCount: Int

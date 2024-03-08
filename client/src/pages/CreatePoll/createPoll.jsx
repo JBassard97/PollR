@@ -1,3 +1,4 @@
+import "./createPoll.css";
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_POLL } from "../../utils/mutations";
@@ -54,10 +55,10 @@ export default function CreatePoll() {
 
     try {
       const { data } = await createPoll({
-          variables: { input: createPollInput },
+        variables: { input: createPollInput },
       });
-        
-        window.location.reload();
+
+      window.location.reload();
     } catch (e) {
       console.error(e);
     }
