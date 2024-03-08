@@ -55,6 +55,10 @@ const Poll = ({ poll }) => {
       <div>
         <p className="pollHeader">{poll.header}</p>
         <p className="pollDesc">{poll.description}</p>
+        <div>
+            <button onClick={() => setOpenModal(true)}>Show Results!</button>
+            <Modal open={openModal} onClose={() => setOpenModal(false)}/>
+          </div>
       </div>
       {!errorMessage ? <></> : errorMessage}
       {poll?.choices?.map((choice, index) => (
