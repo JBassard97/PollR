@@ -1,31 +1,55 @@
-// import React from 'react';
-// import '../../App.css';
-// import '../../../../node_modules/react-vis/dist/style.css'
-// import {XYPlot, XAxis, YAxis, VerticalBarSeries, LineSeries} from 'react-vis';
+import React, { useState } from 'react';
+import {XYPlot, XAxis, YAxis, VerticalBarSeries, } from 'react-vis';
 
-// export default function createPoll() {
+import '../../App.css';
+import '../../../../node_modules/react-vis/dist/style.css'
 
-//     const data = [
-//         {x: 0, y: 8},
-//         {x: 1, y: 5},
-//         {x: 2, y: 4},
-//         {x: 3, y: 9},
-//         {x: 4, y: 1},
-//         {x: 5, y: 7},
-//         {x: 6, y: 6},
-//         {x: 7, y: 3},
-//         {x: 8, y: 2},
-//         {x: 9, y: 0}
-//       ];
 
+// const Graph = ({poll}) => {
+
+//     const pollData = poll.data.map((data) => {
+//         return {x: data.choices.text,
+//         y: data.voteCount}
+//     })
+
+//     if (loading) {
+//         return <div>Loading...</div>
+//     }
+    
 //     return (
 //         <div>
-//             <XYPlot width={300} height={250}>
-//                 <XAxis/>
-//                 <YAxis/>
-//                 <VerticalBarSeries data={data} />
-//             </XYPlot>
+//             <XYPlot 
+//                 width={300} 
+//                 height={250}>
+//             <XAxis/>
+//             <YAxis title="Number of votes"/>
+//             <VerticalBarSeries 
+//                 data={pollData} 
+//                 style={{ color: 'red'}}/>
+//             </XYPlot>  
 //         </div>
+//     );
+// };
 
-//  );
-// }
+const Graph = () => {
+    return (
+                <div>
+                    <XYPlot 
+                        width={350} 
+                        height={350}>
+                    <XAxis/>
+                    <YAxis title="Number of votes"/>
+                    <VerticalBarSeries 
+                        data={[
+                            {x: 1, y: 4},
+                            {x: 5, y: 2},
+                            {x: 15, y: 6}
+                        ]}
+                        style={{ color: 'red'}}/>
+                    </XYPlot>  
+                </div>
+            );
+};
+
+export default Graph;
+

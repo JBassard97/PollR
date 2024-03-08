@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_VOTE } from "../../utils/mutations";
 import Auth from "../../utils/auth";
+import Modal from "../../components/Modal/index"
 
 const Poll = ({ poll }) => {
   const [createVote, { error, data }] = useMutation(CREATE_VOTE);
@@ -17,7 +18,7 @@ const Poll = ({ poll }) => {
         // Check if the user ID of the current vote matches the currentUserId
         if (vote.user && vote.user._id === currentUserId) {
           hasUserVoted = true;
-          console.log("You've already voted");
+          console.log("true")
           // If a match is found, break out of the loop
           break;
         }

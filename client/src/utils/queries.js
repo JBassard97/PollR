@@ -18,8 +18,14 @@ export const GET_CURRENT_USER = gql`
         description
         voteCount
         choices {
+          _id
           text
           voteCount
+        }
+        votes{
+          user{
+            _id
+          }
         }
       }
       votesMade {
