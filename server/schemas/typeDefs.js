@@ -22,8 +22,8 @@ type Poll {
 
 type Choice {
   _id: ID # Unique identifier for the choice
-  text: String! # Text of the choice
-  votes: [Vote]! # Votes cast for this choice
+  text: String # Text of the choice
+  votes: [Vote!] # Votes cast for this choice
   voteCount: Int! # Total number of votes for this choice
 }
 
