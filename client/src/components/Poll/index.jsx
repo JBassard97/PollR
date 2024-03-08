@@ -10,10 +10,19 @@ const Poll = ({ poll }) => {
 
   let hasUserVoted = false;
   if (Auth.loggedIn()) {
-    const currentUserId = Auth.getProfile().authenticatedPerson._id || null;
-    hasUserVoted = poll?.votes?.some(
-      (vote) => vote?.user?._id === currentUserId
-    );
+    const currentUserId = Auth.getProfile().authenticatedPerson?._id;
+    if (currentUserId) {
+      // Iterate through the votes array
+      for (const vote of poll.votes) {
+        // Check if the user ID of the current vote matches the currentUserId
+        if (vote.user && vote.user._id === currentUserId) {
+          hasUserVoted = true;
+          console.log("You've already voted");
+          // If a match is found, break out of the loop
+          break;
+        }
+      }
+    }
   }
 
   const handleChoiceClick = async (choiceId) => {
@@ -48,13 +57,13 @@ const Poll = ({ poll }) => {
   };
 
   return (
-    <div className="poll" id={poll?._id}>
+    <div className="poll" id={poll._id}>
       <div>
-        <p className="pollHeader">{poll?.header}</p>
-        <p className="pollDesc">{poll?.description}</p>
+        <p className="pollHeader">{poll.header}</p>
+        <p className="pollDesc">{poll.description}</p>
       </div>
       {!errorMessage ? <></> : errorMessage}
-      {poll?.choices?.map((choice, index) => (
+      {poll.choices.map((choice, index) => (
         <p
           className={`pollChoice ${hasUserVoted ? "disabled" : ""}`}
           id={choice._id}
@@ -64,9 +73,7 @@ const Poll = ({ poll }) => {
           {choice.text}
         </p>
       ))}
-      <p className="createdBy">
-        Created by: {poll?.creator?.username || "Unknown"}
-      </p>
+      <p className="createdBy">Created by: {poll.creator.username}</p>
     </div>
   );
 };
