@@ -18,6 +18,7 @@ export default function UserProfile() {
     console.log("User data:", data?.me);
   }, [data]);
   */
+  
 
   const username = Auth.getProfile().authenticatedPerson.username;
 

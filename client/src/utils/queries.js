@@ -116,6 +116,12 @@ export const GET_ALL_POLLS = gql`
         _id
         text
         voteCount
+        votes {
+          _id
+          user {
+            _id
+          }
+        }
       }
       creator {
         username

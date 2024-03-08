@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_POLL } from "../../utils/mutations";
 import Auth from "../../utils/auth";
-import "./createPoll.css"
+import "./createPoll.css";
 
 export default function CreatePoll() {
   const [formState, setFormState] = useState({
@@ -58,7 +58,7 @@ export default function CreatePoll() {
         variables: { input: createPollInput },
       });
 
-      window.location.reload();
+      window.location.href = "./userProfile";
     } catch (e) {
       console.error(e);
     }

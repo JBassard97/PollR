@@ -1,20 +1,28 @@
 import "./poll.css";
-import { useState } from "react";
+import { useState, useEffect } from "react"; // Import useEffect hook
 import { useMutation } from "@apollo/client";
 import { CREATE_VOTE } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 
 const Poll = ({ poll }) => {
-  const [createVote, { error, data }] = useMutation(CREATE_VOTE);
-  const [errorMessage, setErrorMessage] = useState(false);
+  const [createVote, { error }] = useMutation(CREATE_VOTE);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [hasUserVoted, setHasUserVoted] = useState(false);
 
-  let hasUserVoted = false;
-  if (Auth.loggedIn()) {
-    const currentUserId = Auth.getProfile().authenticatedPerson._id || null;
-    hasUserVoted = poll?.votes?.some(
-      (vote) => vote?.user?._id === currentUserId
-    );
-  }
+  useEffect(() => {
+    // Update hasUserVoted state only once after component mount
+    if (Auth.loggedIn() && !hasUserVoted) {
+      const currentUserId = Auth.getProfile().authenticatedPerson?._id;
+      if (currentUserId) {
+        for (const vote of poll.votes) {
+          if (vote.user && vote.user._id === currentUserId) {
+            setHasUserVoted(true);
+            break;
+          }
+        }
+      }
+    }
+  }, [poll, hasUserVoted]); // Add poll and hasUserVoted to dependency array
 
   const handleChoiceClick = async (choiceId) => {
     if (!poll || !poll._id) {
@@ -23,50 +31,44 @@ const Poll = ({ poll }) => {
     }
 
     if (hasUserVoted || !Auth.loggedIn()) {
-      handleInvalidVote(choiceId); // Call handleInvalidVote with choiceId
-    } else {
-      console.log("Choice Id:", choiceId);
-      console.log("Poll Id:", poll._id);
-      try {
-        const { data } = await createVote({
-          variables: { pollId: poll._id, choiceId: choiceId },
-        });
-      } catch (error) {
-        console.error("error:", error);
-      }
+      handleInvalidVote();
+      return;
+    }
+
+    try {
+      await createVote({ variables: { pollId: poll._id, choiceId: choiceId } });
+      setHasUserVoted(true);
+    } catch (error) {
+      console.error("Error creating vote:", error);
+      setErrorMessage("An error occurred while creating the vote.");
     }
   };
 
-  const handleInvalidVote = (choiceId) => {
+  const handleInvalidVote = () => {
     if (!Auth.loggedIn()) {
-      console.log("Log In/Sign Up to Vote");
-      setErrorMessage(<p className="error">Log In to Vote!</p>);
+      setErrorMessage("Log In to Vote!");
     } else {
-      console.log("You can't vote twice!", choiceId); // Log choiceId
-      setErrorMessage(<p className="error">Already Voted!</p>);
+      setErrorMessage("Already Voted!");
     }
   };
 
   return (
-    <div className="poll" id={poll?._id}>
+    <div className="poll" id={poll._id}>
       <div>
-        <p className="pollHeader">{poll?.header}</p>
-        <p className="pollDesc">{poll?.description}</p>
+        <p className="pollHeader">{poll.header}</p>
+        <p className="pollDesc">{poll.description}</p>
       </div>
-      {!errorMessage ? <></> : errorMessage}
-      {poll?.choices?.map((choice, index) => (
+      {errorMessage && <p className="error">{errorMessage}</p>}
+      {poll.choices.map((choice, index) => (
         <p
-          className={`pollChoice ${hasUserVoted ? "disabled" : ""}`}
-          id={choice._id}
           key={index}
-          onClick={() => handleChoiceClick(choice._id)} // Pass choiceId to handleChoiceClick
+          className={`pollChoice ${hasUserVoted ? "disabled" : ""}`}
+          onClick={() => handleChoiceClick(choice._id)}
         >
           {choice.text}
         </p>
       ))}
-      <p className="createdBy">
-        Created by: {poll?.creator?.username || "Unknown"}
-      </p>
+      <p className="createdBy">Created by: {poll.creator.username}</p>
     </div>
   );
 };
