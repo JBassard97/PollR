@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Graph from '../../components/Poll/Graph'
 import "./modal.css"
 
 const Modal = ({open, onClose}) => {
@@ -10,13 +11,13 @@ const Modal = ({open, onClose}) => {
             <div 
                 onClick={(e) => { e.stopPropagation();}}
                 className="modalContainer">
-                <div>
-                    {/* <Graph /> */}
+                <div className="graph">
+                    <Graph />
                 </div>
                 <button 
-                        className="close-modal" 
-                        onClick={onClose}>
-                        Close Results
+                    className="close-modal" 
+                    onClick={onClose}>
+                    Close Results
                 </button>
             </div>              
         </div>
