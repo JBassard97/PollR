@@ -1,0 +1,10 @@
+
+
+/* ! Controlling layout of specifically polls on UserProfile Page */
+.pollContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-evenly;
+}
