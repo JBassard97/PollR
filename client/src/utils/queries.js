@@ -12,6 +12,7 @@ export const GET_CURRENT_USER = gql`
       pollsMade {
         creator {
           _id
+          username
         }
         _id
         header
