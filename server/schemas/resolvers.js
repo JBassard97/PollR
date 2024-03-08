@@ -7,8 +7,10 @@ const resolvers = {
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id })
-          .populate({ path: "pollsMade", populate: { path: "votes"} })
+          .populate({ path: "pollsMade", populate: { path: "creator", model: "User" }})
           .populate("votesMade");
+          /*.populate({ path: "pollsMade", populate: { path: "votes"} })
+          .populate("votesMade");*/
       }
       throw AuthenticationError;
     },
@@ -125,6 +127,9 @@ const resolvers = {
     },
 
     deletePoll: async (parent, { _id }) => {
+      //delete related votes
+      await Vote.deleteMany({ poll: _id} );
+
       const deletedPoll = await Poll.findByIdAndDelete(_id);
       return deletedPoll;
     },
