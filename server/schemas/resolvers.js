@@ -126,12 +126,26 @@ const resolvers = {
       }
     },
 
-    deletePoll: async (parent, { _id }) => {
-      //delete related votes
-      await Vote.deleteMany({ poll: _id} );
+    deletePoll: async (parent, { _id }, context) => {
+      
+      try {
+        //delete related votes
+        await Vote.deleteMany({ poll: _id} );
 
-      const deletedPoll = await Poll.findByIdAndDelete(_id);
-      return deletedPoll;
+        //remove related pollId from User.pollsMade
+        await User.findByIdAndUpdate(context.user._id, {
+          $pull: { pollsMade: _id },
+        });
+
+        //remove related voteIDs from User.votesMade
+
+        //delete Poll
+        const deletedPoll = await Poll.findByIdAndDelete(_id);
+        return deletedPoll;
+      } catch (error) {
+        console.error("Error deleting poll:", error);
+        throw new Error("An error occurred while deleting the post");
+      }
     },
     createVote: async (parent, { pollId, choiceId }, context) => {
       // Check if user is authenticated
