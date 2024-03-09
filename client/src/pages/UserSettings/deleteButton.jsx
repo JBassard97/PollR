@@ -21,9 +21,11 @@ const DeleteAccountButton = ({ userId } ) => {
   };
 
   return (
-    <button onClick={handleDelete} className="btn btn-danger">
-      Delete Account
-    </button>
+    <div className="text-center">
+      <button onClick={handleDelete} className="btn btn-danger col-6">
+        Delete Account
+      </button>
+    </div>
   );
 };
 
