@@ -6,14 +6,14 @@
   padding: 5px;
   border-radius: 10px;
   /* ? Sick Size Scaling */
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.2s ease-in-out;
   /* ! Margin (top-bottom) and (left-right) */
   margin: 7px 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  background-color: #1A1A1B;
+  background-color: #1a1a1b;
 }
 
 .poll:hover {
@@ -22,6 +22,18 @@
 
 .poll:not(:hover) {
   transform: scale(1);
+}
+
+.totalVotes {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.hasVotedIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .pollHeader {
@@ -43,7 +55,8 @@
   color: red;
   transform: rotate(-59deg) translate(-90px, 25px);
   font-size: 28px;
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.2s ease-in-out;
+  z-index: 5;
 }
 
 button {
@@ -56,6 +69,17 @@ p {
   margin: 0;
 }
 
+.choiceStats {
+  color: lightgrey;
+  font-style: italic;
+  font-size: 12px;
+  margin-right: 3px;
+}
+
+.choiceText {
+  font-size: 15px;
+}
+
 .createdBy {
   font-size: 10px;
 }
@@ -64,13 +88,18 @@ p {
   border: 1px solid grey;
   padding-left: 5px;
   border-radius: 10px;
-  transition: color 0.2s ease-in-out, background 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out, background 0.2s ease-in-out,
+    transform 0.2s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .pollChoice:hover {
   background: whitesmoke;
   color: black;
   cursor: pointer;
+  transform: scale(1.025);
 }
 
 .pollChoice:not(:hover) {
