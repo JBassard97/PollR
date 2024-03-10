@@ -1,5 +1,5 @@
 const { User, Poll, Vote } = require("../models");
-
+const bcrypt = require("bcrypt");
 const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
@@ -7,10 +7,22 @@ const resolvers = {
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id })
-          .populate({ path: "pollsMade", populate: { path: "votes"} })
+          .populate({
+            path: "pollsMade",
+            populate: [
+              { path: "creator", model: "User" },
+              {
+                path: "votes",
+                populate: {
+                  path: "user",
+                  model: "User",
+                },
+              },
+            ],
+          })
           .populate("votesMade");
       }
-      throw AuthenticationError;
+      throw new AuthenticationError();
     },
     users: async () => {
       return User.find().populate("pollsMade").populate("votesMade");
@@ -39,9 +51,9 @@ const resolvers = {
           .populate("creator", "username") // Populate only the username of the creator
           .populate({
             path: "choices",
-            populate: { path: "votes" }, // Populate votes field in choices
+            populate: { path: "votes", populate: { path: "user" } }, // Populate votes field in choices with user information
           })
-          .populate("votes.user"); // Populate only the _id of the user who voted
+          .populate({ path: "votes", populate: { path: "user" } }); // Populate votes field in polls with user information
       } catch (error) {
         console.error("Error retrieving polls:", error);
         throw new Error("An error occurred while retrieving polls.");
@@ -78,6 +90,11 @@ const resolvers = {
       return poll;
     },
     updateUser: async (parent, { _id, input }) => {
+      if (input.password) {
+        const saltRounds = 10;
+        input.password = await bcrypt.hash(input.password, saltRounds);
+      }
+
       const updatedUser = await User.findByIdAndUpdate(_id, input, {
         new: true,
       });
@@ -124,9 +141,25 @@ const resolvers = {
       }
     },
 
-    deletePoll: async (parent, { _id }) => {
-      const deletedPoll = await Poll.findByIdAndDelete(_id);
-      return deletedPoll;
+    deletePoll: async (parent, { _id }, context) => {
+      try {
+        //delete related votes
+        await Vote.deleteMany({ poll: _id });
+
+        //remove related pollId from User.pollsMade
+        await User.findByIdAndUpdate(context.user._id, {
+          $pull: { pollsMade: _id },
+        });
+
+        //remove related voteIDs from User.votesMade
+
+        //delete Poll
+        const deletedPoll = await Poll.findByIdAndDelete(_id);
+        return deletedPoll;
+      } catch (error) {
+        console.error("Error deleting poll:", error);
+        throw new Error("An error occurred while deleting the post");
+      }
     },
     createVote: async (parent, { pollId, choiceId }, context) => {
       // Check if user is authenticated

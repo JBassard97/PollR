@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_POLL } from "../../utils/mutations";
 import Auth from "../../utils/auth";
-import "./createPoll.css"
+import "./createPoll.css";
 
 export default function CreatePoll() {
   const [formState, setFormState] = useState({
@@ -58,7 +58,7 @@ export default function CreatePoll() {
         variables: { input: createPollInput },
       });
 
-      window.location.reload();
+      window.location.href = "./userProfile";
     } catch (e) {
       console.error(e);
     }
@@ -85,7 +85,7 @@ export default function CreatePoll() {
           <h2 className="p-4 m-2">Create a Poll</h2>
           <form onSubmit={handleFormSubmit} className="p-4">
             <div className="form-group row p-2">
-              <label className="col-sm-2 col-form-label">Title: </label>
+              <h5 className="col-sm-2 col-form-label">Title: </h5>
               <div className="col-sm-8">
                 <input
                   placeholder="Poll Title"
@@ -201,7 +201,7 @@ export default function CreatePoll() {
               </div>
             </div>
             <div className="submitBtn">
-              <button className="bg-dark text-light p-3 m-2" type="submit">
+              <button className="col-6" type="submit">
                 Create Poll
               </button>
             </div>

@@ -9,7 +9,9 @@
     "install": "cd server && npm i && cd ../client && npm i",
     "seedUsers": "cd server/seeders && node seedUsers",
     "build": "cd client && npm run build",
-    "render-build": "npm install && npm run build"
+    "render-build": "npm install && npm run build",
+    "clearPolls": "cd server/seeders && node clearPolls",
+    "clearDB": "cd server/seeders && node clearDB"
   },
   "keywords": [],
   "author": "",

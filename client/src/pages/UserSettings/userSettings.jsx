@@ -4,6 +4,7 @@ import { UPDATE_USER } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 import { GET_CURRENT_USER } from "../../utils/queries";
 import DeleteAccountButton from "./deleteButton";
+import "./userSettings.css";
 
 export default function UserSettings() {
   const [formState, setFormState] = useState({
@@ -81,70 +82,76 @@ export default function UserSettings() {
   if (loading) return <div>Loading...</div>; // Show loading message while fetching user data
 
   return (
-    <div className="container">
-      <h1>User Settings for {formState.username}</h1>
-      <form>
-        <div className="form-group">
-          <h5 htmlFor="username">Update Username:</h5>
+    <div>
+      <h2 className="p-4 m-2">User Settings for {formState.username}</h2>
+      <form className="p-4 m-2">
+        <div className="settings-group form-group p-2">
+          <label className="col-form-label" htmlFor="username">Update Username:</label>
           <input
             type="text"
             id="username"
             name="username"
             value={formState.username}
             onChange={handleChange}
-            className="form-control"
+            className="form-control bg-dark text-light"
             placeholder="Enter your new username"
           />
           {formError.username && (
             <p className="text-danger">{formError.username}</p>
           )}
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => handleSubmit("username", formState.username)}
-          >
-            Update Username
-          </button>
+          <div className="text-center">
+            <button
+              type="button"
+              className="col-sm-4 m-sm-4"
+              onClick={() => handleSubmit("username", formState.username)}
+            >
+              Update Username
+            </button>
+          </div>
         </div>
-        <div className="form-group">
-          <h5 htmlFor="email">Update Email:</h5>
+        <div className="settings-group form-group p-2">
+          <label className="col-form-label" htmlFor="email">Update Email:</label>
           <input
             type="email"
             id="email"
             name="email"
             value={formState.email}
             onChange={handleChange}
-            className="form-control"
+            className="form-control bg-dark text-light"
             placeholder="Enter your new email"
             pattern="[^\s@]+@[^\s@]+\.[^\s@]+"
           />
           {formError.email && <p className="text-danger">{formError.email}</p>}
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => handleSubmit("email", formState.email)}
-          >
-            Update Email
-          </button>
+          <div className="text-center">
+            <button
+              type="button"
+              className="col-sm-4 m-sm-4"
+              onClick={() => handleSubmit("email", formState.email)}
+            >
+              Update Email
+            </button>
+          </div>
         </div>
-        <div className="form-group">
-          <h5 htmlFor="password">Update Password:</h5>
+        <div className="settings-group form-group p-2">
+          <label className="col-form-label" htmlFor="password">Update Password:</label>
           <input
             type="password"
             id="password"
             name="password"
             value={formState.password}
             onChange={handleChange}
-            className="form-control"
+            className="form-control bg-dark text-light col"
             placeholder="Enter your new password"
           />
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => handleSubmit("password", formState.password)}
-          >
-            Update Password
-          </button>
+          <div className="text-center">
+            <button
+              type="button"
+              className="col-sm-4 m-sm-4"
+              onClick={() => handleSubmit("password", formState.password)}
+            >
+              Update Password
+            </button>
+          </div>
         </div>
         {error && <p>Error updating user: {error.message}</p>}
           </form>
