@@ -44,10 +44,11 @@ const Login = (props) => {
 
   return (
     <main className="loginContainer container mb-4">
+      <h2 className="p-4 m-2">Login</h2>
       <div className="d-flex justify-content-center col-12 col-lg-10">
         <div className="card">
           <h4 className="card-header bg-dark text-light p-2">Login</h4>
-          <div className="card-body">
+          <div className="card-body" style={{backgroundColor: "#1a1a1b"}}>
             {data ? (
               <p>
                 Success! You may now head{" "}
@@ -56,7 +57,7 @@ const Login = (props) => {
             ) : (
               <form onSubmit={handleFormSubmit}>
                 <input
-                  className="form-input w-50"
+                  className="form-input bg-dark text-light"
                   placeholder="Your email"
                   name="email"
                   type="email"
@@ -68,7 +69,7 @@ const Login = (props) => {
                 />
                 <br/>
                 <input
-                  className="form-input w-50"
+                  className="form-input bg-dark text-light"
                   placeholder="******"
                   name="password"
                   type="password"
