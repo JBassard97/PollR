@@ -39,19 +39,26 @@ const Poll = ({ poll }) => {
   );
 
   useEffect(() => {
-    // Update hasUserVoted state only once after component mount
-    if (Auth.loggedIn() && !hasUserVoted) {
-      const currentUserId = Auth.getProfile().authenticatedPerson?._id;
-      if (currentUserId) {
-        for (const vote of poll.votes) {
-          if (vote.user && vote.user._id === currentUserId) {
-            setHasUserVoted(true);
-            break;
+    // Update hasUserVoted state based on localStorage
+    const storedHasUserVoted = localStorage.getItem(`hasUserVoted_${poll._id}`);
+    if (storedHasUserVoted !== null) {
+      setHasUserVoted(storedHasUserVoted === "true");
+    } else {
+      // Update hasUserVoted state only once after component mount
+      if (Auth.loggedIn()) {
+        const currentUserId = Auth.getProfile().authenticatedPerson?._id;
+        if (currentUserId) {
+          for (const vote of poll.votes) {
+            if (vote.user && vote.user._id === currentUserId) {
+              setHasUserVoted(true);
+              localStorage.setItem(`hasUserVoted_${poll._id}`, "true");
+              break;
+            }
           }
         }
       }
     }
-  }, [poll, hasUserVoted]); // Add poll and hasUserVoted to dependency array
+  }, [poll]);
 
   const handleChoiceClick = async (choiceId) => {
     if (!poll || !poll._id) {
@@ -67,6 +74,7 @@ const Poll = ({ poll }) => {
     try {
       await createVote({ variables: { pollId: poll._id, choiceId: choiceId } });
       setHasUserVoted(true);
+      localStorage.setItem(`hasUserVoted_${poll._id}`, "true"); // Store hasUserVoted in localStorage
       setUpdatedVoteCount(updatedVoteCount + 1); // Update the vote count
 
       // Update the choices array with new vote counts
@@ -91,12 +99,34 @@ const Poll = ({ poll }) => {
     }
   };
 
+  // Listen for the popstate event
+  const handlePopState = () => {
+    // Check if the current URL is "/"
+    if (window.location.href === "/") {
+      // Reset the state to the original poll data
+      setHasUserVoted(false);
+      setUpdatedVoteCount(poll.voteCount);
+      setUpdatedChoices(poll.choices);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("popstate", handlePopState);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [poll, hasUserVoted]); // Add poll and hasUserVoted to dependency array
+
   return (
     <div className="poll" id={poll._id}>
       <div>
         <p className="pollHeader flex-row">
           {poll.header}
-          <span className="hasVotedIcon">{hasUserVoted ? hasVotedIcon : ""}</span>
+          <span className="hasVotedIcon">
+            {hasUserVoted ? hasVotedIcon : ""}
+          </span>
         </p>
         <p className="pollDesc">{poll.description}</p>
       </div>
