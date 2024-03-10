@@ -39,13 +39,14 @@ const Poll = ({ poll }) => {
   );
 
   useEffect(() => {
-    // Update hasUserVoted state based on localStorage
-    const storedHasUserVoted = localStorage.getItem(`hasUserVoted_${poll._id}`);
-    if (storedHasUserVoted !== null) {
-      setHasUserVoted(storedHasUserVoted === "true");
-    } else {
-      // Update hasUserVoted state only once after component mount
-      if (Auth.loggedIn()) {
+    if (Auth.loggedIn()) {
+      // Update hasUserVoted state based on localStorage
+      const storedHasUserVoted = localStorage.getItem(
+        `hasUserVoted_${poll._id}`
+      );
+      if (storedHasUserVoted !== null) {
+        setHasUserVoted(storedHasUserVoted === "true");
+      } else {
         const currentUserId = Auth.getProfile().authenticatedPerson?._id;
         if (currentUserId) {
           for (const vote of poll.votes) {
@@ -59,6 +60,7 @@ const Poll = ({ poll }) => {
       }
     }
   }, [poll]);
+
 
   const handleChoiceClick = async (choiceId) => {
     if (!poll || !poll._id) {
