@@ -1,5 +1,5 @@
 const { User, Poll, Vote } = require("../models");
-
+const bcrypt = require("bcrypt");
 const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
@@ -90,6 +90,11 @@ const resolvers = {
       return poll;
     },
     updateUser: async (parent, { _id, input }) => {
+      if (input.password) {
+        const saltRounds = 10;
+        input.password = await bcrypt.hash(input.password, saltRounds);
+      }
+
       const updatedUser = await User.findByIdAndUpdate(_id, input, {
         new: true,
       });
