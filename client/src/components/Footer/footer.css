@@ -39,3 +39,8 @@
     width: 30px; /* Set logo width */
     height: auto; /* Maintain aspect ratio */
 }
+
+.poll-logo {
+    width: 70px;
+    height: auto;
+}

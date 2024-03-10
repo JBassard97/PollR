@@ -1,4 +1,5 @@
 import GithubLogo from "../../assets/github-logo.png";
+import PollR from "../../assets/PollR-logo-Inverse.png";
 import "./footer.css";
 
 function Footer() {
@@ -6,7 +7,7 @@ function Footer() {
     <footer className="footer p-4 m-2">
       <nav className="navbar justify-content-center">
         <div style={{ color: "white" }}>
-          <h3>PollR Devs:</h3>
+          <h3 className="me-4"><img src={PollR} className="poll-logo"/> Devs:</h3>
         </div>
         <ul>
           <li>
