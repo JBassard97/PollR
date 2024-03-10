@@ -7,12 +7,22 @@ const resolvers = {
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id })
-          .populate({ path: "pollsMade", populate: { path: "creator", model: "User" }})
+          .populate({
+            path: "pollsMade",
+            populate: [
+              { path: "creator", model: "User" },
+              {
+                path: "votes",
+                populate: {
+                  path: "user",
+                  model: "User",
+                },
+              },
+            ],
+          })
           .populate("votesMade");
-          /*.populate({ path: "pollsMade", populate: { path: "votes"} })
-          .populate("votesMade");*/
       }
-      throw AuthenticationError;
+      throw new AuthenticationError();
     },
     users: async () => {
       return User.find().populate("pollsMade").populate("votesMade");
@@ -36,19 +46,19 @@ const resolvers = {
       return poll;
     },
     polls: async () => {
-  try {
-    return await Poll.find()
-      .populate("creator", "username") // Populate only the username of the creator
-      .populate({
-        path: "choices",
-        populate: { path: "votes", populate: { path: "user" } }, // Populate votes field in choices with user information
-      })
-      .populate({ path: "votes", populate: { path: "user" } }); // Populate votes field in polls with user information
-  } catch (error) {
-    console.error("Error retrieving polls:", error);
-    throw new Error("An error occurred while retrieving polls.");
-  }
-},
+      try {
+        return await Poll.find()
+          .populate("creator", "username") // Populate only the username of the creator
+          .populate({
+            path: "choices",
+            populate: { path: "votes", populate: { path: "user" } }, // Populate votes field in choices with user information
+          })
+          .populate({ path: "votes", populate: { path: "user" } }); // Populate votes field in polls with user information
+      } catch (error) {
+        console.error("Error retrieving polls:", error);
+        throw new Error("An error occurred while retrieving polls.");
+      }
+    },
   },
   User: {
     pollCount: (parent) => parent.pollsMade.length || 0,
@@ -127,10 +137,9 @@ const resolvers = {
     },
 
     deletePoll: async (parent, { _id }, context) => {
-      
       try {
         //delete related votes
-        await Vote.deleteMany({ poll: _id} );
+        await Vote.deleteMany({ poll: _id });
 
         //remove related pollId from User.pollsMade
         await User.findByIdAndUpdate(context.user._id, {

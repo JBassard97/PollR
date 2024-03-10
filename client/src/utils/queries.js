@@ -23,9 +23,10 @@ export const GET_CURRENT_USER = gql`
           text
           voteCount
         }
-        votes{
-          user{
+        votes {
+          user {
             _id
+            username
           }
         }
       }
@@ -127,8 +128,8 @@ export const GET_ALL_POLLS = gql`
         username
         _id
       }
-      votes{
-        user{
+      votes {
+        user {
           _id
         }
       }
