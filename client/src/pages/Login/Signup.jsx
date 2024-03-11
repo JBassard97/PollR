@@ -40,7 +40,7 @@ const Signup = () => {
 
   return (
     <main className="container mb-4">
-      <div className="d-flex justify-content-center col-12 col-lg-10">
+      <div className="d-flex justify-content-center col-12 col-lg-10 mt-5">
         <div className="card">
           <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
           <div className="card-body">
@@ -52,7 +52,7 @@ const Signup = () => {
             ) : (
               <form onSubmit={handleFormSubmit}>
                 <input
-                  className="form-input w-50"
+                  className="form-input w-100"
                   placeholder="Your username"
                   name="username"
                   type="text"
@@ -64,7 +64,7 @@ const Signup = () => {
                 />
                 <br/>
                 <input
-                  className="form-input w-50"
+                  className="form-input w-100"
                   placeholder="Your email"
                   name="email"
                   type="email"
@@ -76,7 +76,7 @@ const Signup = () => {
                 />
                 <br/>
                 <input
-                  className="form-input w-50"
+                  className="form-input w-100"
                   placeholder="******"
                   name="password"
                   type="password"

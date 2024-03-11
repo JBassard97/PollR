@@ -24,7 +24,7 @@ function Nav() {
             <img src={pollRLogo} className="pollRLogo" alt="siteLogo"></img>
           </Link>
         </h1>
-        <nav className="nav navbar nav-pills col-md-9 justify-content-end">
+        <nav className="nav navbar nav-pills col-md-8 justify-content-end">
           {Auth.loggedIn() && (
             <>
               <ul className="nav-item">
