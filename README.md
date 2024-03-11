@@ -1,6 +1,8 @@
 # PollR
 
-![PollR Homepage](../PollR/client/src/assets/PollR-home.jpg)
+https://pollr.onrender.com
+
+![PollR Homepage](./client/src/assets/PollR-home.jpg)
 
 ## Table of Contents
 - [Title](#title)
@@ -30,19 +32,19 @@ PollR: https://pollr.onrender.com
 
 PollR allows you to create a user profile to then engage in creating your own polls as well as voting in other users polls.  To get started, click on the Log-in link on the navigation bar to create an account:
 
-![PollR Log-in page](../PollR/client/src/assets/PollR-login-signup.jpg)
+![PollR Log-in page](../client/src/assets/PollR-login-signup.jpg)
 
 To create a Poll, click on the Create Poll link on the navigation bar and enter the required information:
 
-![PollR Create Poll page](../PollR/client/src/assets/PollR-create.jpg)
+![PollR Create Poll page](./client/src/assets/PollR-create.jpg)
 
 Polls created by the user may be deleted via the My Profile page:
 
-![PollR Profile page](../PollR/client/src/assets/PollR-profile.jpg)
+![PollR Profile page](./client/src/assets/PollR-profile.jpg)
 
 Finally, you may update your username, email or password via the settings page: 
 
-![PollR Settings page](../PollR/client/src/assets/PollR-settings.jpg)
+![PollR Settings page](./client/src/assets/PollR-settings.jpg)
 
 Further application details:
 
