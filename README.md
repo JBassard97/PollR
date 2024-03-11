@@ -19,8 +19,10 @@ This repository contains the source code for our app, PollR! The site allows use
 To visit the live site, visit the link under `Usage` To run the project locally, follow these steps:
 
 - Clone the repository from https://github.com/JBassard97/PollR to the desired directory on your computer.
-- Open the repository in the root directory and run the command `npm install` to install the required packages and dependencies.
+- Open the repository in the root directory and run the command `npm run install` to install the required packages and dependencies.
+- To build the frontend server, run the command `npm run build`
 - To run the server and client, run the command `npm run develop`.  This will start the server locally as well as open the client in your computer's browser.
+- Don't forget to enter `Ctrl + C` when you're finished running the server to free your port up.
 
 ## Usage
 
