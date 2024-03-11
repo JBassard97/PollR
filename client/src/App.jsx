@@ -4,6 +4,7 @@ import {
   ApolloProvider,
   createHttpLink,
 } from "@apollo/client";
+import { useEffect } from "react";
 import { setContext } from "@apollo/client/link/context";
 import { Outlet } from "react-router-dom";
 import Nav from "./components/NavHeader";
@@ -37,7 +38,7 @@ function App() {
     <>
       <ApolloProvider client={client}>
         <Nav />
-          <Outlet />
+        <Outlet />
         <Footer />
       </ApolloProvider>
     </>
