@@ -36,7 +36,7 @@ PollR: https://pollr.onrender.com
 
 PollR allows you to create a user profile to then engage in creating your own polls as well as voting in other users polls.  To get started, click on the Log-in link on the navigation bar to create an account:
 
-![PollR Log-in page](../client/src/assets/PollR-login-signup.jpg)
+![PollR Log-in page](./client/src/assets/PollR-login-signup.jpg)
 
 To create a Poll, click on the Create Poll link on the navigation bar and enter the required information:
 
