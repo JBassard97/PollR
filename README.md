@@ -16,6 +16,12 @@ https://pollr.onrender.com
 
 This repository contains the source code for our app, PollR! The site allows users to vote on polls, and create their own and see their previous responses once they've made an account.
 
+PollR is a web application based on a MERN stack (MongoDB, Express.js, React.js and Node.js).  The following packages were also used:
+- Apollo Server and GraphQL
+- JWT (JSON Web Tokens)
+- Vite
+- React Bootstrap
+
 ## Installation
 
 To visit the live site, visit the link under `Usage` To run the project locally, follow these steps:
