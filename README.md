@@ -87,6 +87,6 @@ SOFTWARE.
 - Michael Levey - https://github.com/MLevey92
 - Jonathan Acciarito - https://github.com/JBassard97
 - Anthony Michel - https://github.com/Ant-M84
-- Ian Reynolds - 
+- Ian Reynolds - https://github.com/Ianreynolds01
 
 
