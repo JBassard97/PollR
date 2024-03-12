@@ -23,7 +23,7 @@ function Footer() {
             <p>Anthony</p>
           </li>
           <li>
-            <a href="">
+            <a href="https://github.com/Ianreynolds01">
               <img src={GithubLogo} className="logo" alt="githubLogo" />
             </a>
             <p>Ian</p>
