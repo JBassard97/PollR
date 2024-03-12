@@ -130,7 +130,7 @@ const Poll = ({ poll }) => {
             {hasUserVoted ? hasVotedIcon : ""}
           </span>
         </p>
-        <p className="pollDesc">{poll.description}</p>
+        <p className="pollDesc mt-2">{poll.description}</p>
       </div>
       {errorMessage && <p className="error">{errorMessage}</p>}
       {updatedChoices.map((choice, index) => {
