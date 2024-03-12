@@ -122,7 +122,7 @@ export default function CreatePoll() {
                   placeholder="Choice 1"
                   type="text"
                   id="descriptionInput"
-                  className="form-control bg-dark text-light"
+                  className="form-control bg-dark text-light mb-1"
                   name="choice1"
                   value={formState.choice1}
                   onChange={handleChange}
@@ -132,7 +132,7 @@ export default function CreatePoll() {
                   placeholder="Choice 2"
                   type="text"
                   id="descriptionInput"
-                  className="form-control bg-dark text-light"
+                  className="form-control bg-dark text-light mb-1"
                   name="choice2"
                   value={formState.choice2}
                   onChange={handleChange}
@@ -142,7 +142,7 @@ export default function CreatePoll() {
                   placeholder="Choice 3"
                   type="text"
                   id="descriptionInput"
-                  className="form-control bg-dark text-light"
+                  className="form-control bg-dark text-light mb-1"
                   name="choice3"
                   value={formState.choice3}
                   onChange={handleChange}
@@ -152,7 +152,7 @@ export default function CreatePoll() {
                   placeholder="Choice 4"
                   type="text"
                   id="descriptionInput"
-                  className="form-control bg-dark text-light"
+                  className="form-control bg-dark text-light mb-1"
                   name="choice4"
                   value={formState.choice4}
                   onChange={handleChange}
@@ -162,7 +162,7 @@ export default function CreatePoll() {
                   placeholder="Choice 5"
                   type="text"
                   id="descriptionInput"
-                  className="form-control bg-dark text-light"
+                  className="form-control bg-dark text-light mb-1"
                   name="choice5"
                   value={formState.choice5}
                   onChange={handleChange}
@@ -172,7 +172,7 @@ export default function CreatePoll() {
                   placeholder="Choice 6"
                   type="text"
                   id="descriptionInput"
-                  className="form-control bg-dark text-light"
+                  className="form-control bg-dark text-light mb-1"
                   name="choice6"
                   value={formState.choice6}
                   onChange={handleChange}
@@ -182,7 +182,7 @@ export default function CreatePoll() {
                   placeholder="Choice 7"
                   type="text"
                   id="descriptionInput"
-                  className="form-control bg-dark text-light"
+                  className="form-control bg-dark text-light mb-1"
                   name="choice7"
                   value={formState.choice7}
                   onChange={handleChange}
@@ -192,7 +192,7 @@ export default function CreatePoll() {
                   placeholder="Choice 8"
                   type="text"
                   id="descriptionInput"
-                  className="form-control bg-dark text-light"
+                  className="form-control bg-dark text-light mb-1"
                   name="choice8"
                   value={formState.choice8}
                   onChange={handleChange}
